@@ -14,7 +14,7 @@ class Product(models.Model):
     quantity=models.IntegerField(default=0)
     price=models.FloatField()
     discounted_price=models.FloatField()
-    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='products')
 
     def __str__(self) -> str:
         return self.name
@@ -28,13 +28,14 @@ class Customer(models.Model):
         ('F','FEMALE'),
         ('O','OTHER')
 ]
-    first_name=models.CharField(max_length=50)
+    first_name=models.CharField(max_length=50,blank=True,null=True)
     middle_name=models.CharField(max_length=50,blank=True,null=True)
-    last_name=models.CharField(max_length=50)
-    address=models.CharField(max_length=100)
+    last_name=models.CharField(max_length=50,blank=True,null=True)
+    address=models.CharField(max_length=100,blank=True,null=True)
     gender=models.CharField(
         max_length=1,
-        choices=GENDER_CHOICE
+        choices=GENDER_CHOICE,
+        blank=True,null=True
     )
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     
